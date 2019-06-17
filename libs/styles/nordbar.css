@@ -1,0 +1,40 @@
+toolbarbutton.nordbarButton,
+toolbarbutton.tbp-nordStatusBarButton window:not([active="true"]) toolbarbutton.nordbarButton,
+toolbar[iconsize="small"] toolbarbutton.nordbarButton {
+  -moz-box-orient: horizontal;
+  padding: 0 3px;
+}
+
+.tbp-nordStatusBarButton {
+  padding: 0;
+  -moz-image-region: rect(0px, 16px, 16px, 0px);
+  -moz-box-orient: horizontal;
+}
+toolbarbutton#tpb-Nordburg {
+	padding: 0 5px;
+	list-style-image: url("nordburgIcon.png");
+}
+.nordburg-sorted-asc {
+	display: inline-block;
+	padding-left: 13px;
+	padding-right: 13px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-image: url("up-arrow.png");
+}
+.nordburg-sorted-desc {
+	display: inline-block;
+	padding-left: 13px;
+	padding-right: 13px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-image: url("down-arrow.png");
+}
+.nordburg-collapsed-right-arrow {
+	display: inline-block;
+	padding-left: 13px;
+	padding-right: 13px;
+	background-repeat: no-repeat;
+	background-position: left center;
+	background-image: url("right-arrow.png");
+}

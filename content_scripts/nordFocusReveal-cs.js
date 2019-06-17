@@ -1,4 +1,59 @@
-//Public variables
+if (typeof (nordFocusRevealCS) == "undefined") {
+	var nordFocusRevealCS = {};
+}
+
+nordFocusRevealCS = {
+	dbug : nordFocusReveal.dbug,
+	elementOnFocus : null,
+	run : function () {
+		nordFocusRevealCS.elementOnFocus = null;
+		nordFocusReveal.getFocusedItem();
+
+		var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : "No id") + ") has focus");
+		if (nordFocusReveal.options["OutputToConsole"] === true) console.log (output);
+		if (nordFocusReveal.options["DisplayAlerts"] === true) alert (output);
+		
+		if (nordFocusReveal.options["ShowBorder"] === true) nordFocusRevealCS.showBorder();
+		
+		if (nordFocusReveal.options["ShowHighlight"] === true) nordFocusRevealCS.showHighlight();
+
+	}, // End of getFocusItem
+	getFocusedItem: function () {
+        	if (nordFocusRevealCS.dbug) console.log("Getting focused item");
+	        nordFocusRevealCS.elementOnFocus = document.activeElement;
+	}, // End of getFocusItem
+	
+	showBorder : function () {
+		var oldborder = nordFocusRevealCS.elementOnFocus.border.style;
+		if (nordFocusRevealCS.dbug) console.log ("Old background: " + oldborder + ".");
+		nordFocusRevealCS.elementOnFocus.style.border = "8px " + nordFocusReveal.options["borderType"] + " " + nordFocusReveal.options["borderColor"];
+	        setTimeout(function () {
+        		nordFocusRevealCS.elementOnFocus.style.border = oldborder;
+	        }, 250);
+	}, // End of showBorder
+	showHighlight : function () {
+		var oldbackground = nordFocusRevealCS.elementOnFocus.style.backgroundColor;
+		if (nordFocusRevealCS.dbug) console.log ("Old background: " + oldbackground + ".");
+		elementOnFocus.style.backgroundColor = nordFocusReveal.options["HightlightColor"];
+		setTimeout(function () {
+			nordFocusRevealCS.elementOnFocus.style.backgroundColor = oldbackground;
+		}, 250);
+	}, // End of showHighlight
+	
+}
+
+var listener = function (message, sender, sendResponse) {
+	if (nordFocusRevealCS.dbug) console.log ("Listening with dbug: " + nordFocusRevealCS.dbug + ".");
+	
+	if (nordFocusRevealCS.dbug) console.log ("Before starting the scan...");
+	if (message["task"] == "reveal") {
+		nordFocusReveaCS.run();
+	}
+};
+
+browser.runtime.onMessage.addListener(listener);
+
+/*
 var elementOnFocus;
 var consoleOptions;
 var borderOptions;
@@ -179,3 +234,4 @@ function checkUser(e) {
     loadMemory()
 }
 browser.runtime.onConnect.addListener(nordFocusReveal.getFocusItem);
+*/
