@@ -5,7 +5,13 @@ var console_alert = document.getElementById("console_alert");
 
 //Save options
 function SaveOptions(e) {
-    e.preventDefault();
+	e.preventDefault();
+	nordFocusReveal.options["outputToConsole"] = (console_output.value == "checked" ? true : false);
+	nordFocusReveal.options["ConsoleDebug"] = (console_debug.value == "checked" ? true : false);
+	nordFocusReveal.options["DisplayAlerts"] = (console_alert.value == "checked" ? true : false);
+
+	nordFocusReveal.saveOptions(null, nordFocusReveal.errorFun);
+	/*
     isCheckedConsole();
     isCheckedDebug();
     isCheckedAlerts();
@@ -16,10 +22,15 @@ function SaveOptions(e) {
     });
 
     alert("Options saved successfully");
+    */
 }
 
 //Restore settings
 function RestoreOptions(eventThatHappened) {
+	console_output.checked = nordFocusReveal.options["outputToConsole"];
+	console_debug.checked = nordFocusReveal.options["ConsoleDebug"];
+	console_arert.checked = nordFocusReveal.options["DisplayAlerts"];
+	/*
     eventThatHappened.preventDefault();
     function setCurrentChoice(result) {
         if (result.ConsoleDebug == "checked") {
@@ -49,6 +60,7 @@ function RestoreOptions(eventThatHappened) {
     }
     var getting = browser.storage.local.get("ConsoleDebug");
     getting.then(setCurrentChoice);
+    */
 }
 
 //Check and uncheck
@@ -90,6 +102,8 @@ function check() {
 }
 
 // Fade out animation
+// WCAG Violation here.  
+/*
 var opacity = 1;
 var elem = document.getElementById("text");
 var interval = setInterval(fadeOut, 30);
@@ -103,5 +117,6 @@ function fadeOut() {
         elem.parentNode.removeChild(elem);
     }
 }
+*/
 document.addEventListener("DOMContentLoaded", RestoreOptions);
 document.getElementById("form").addEventListener("submit", SaveOptions);

@@ -5,32 +5,32 @@
 		<title>Option page</title>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="Stylesheet" href="options.css">
+		<script src="/libs/nordFocusReveal.js"></script>
 	</head>
 	
 	<body>
-		<header>
-            <ul>
-                <li><img /></li>
-                <li><h3>Focus revealer</h3></li>
-                <li><h1>Options</h1></li>
-                <hr>
-                <li><a class="#" href="options_console.html">Console</a></li>
-                <li><a class="#" href="options_border.html">Border</a></li>
-                <li><a class="#" href="options_highlight.html">Highlight</a></li>
-                <li><a class="active" href="options_about.html">About</a></li>
-                <li><img src="../icons/logo.png" /></li>
-            </ul>
-		</header>
+		<div id="leftPanel">
+			<h1>Focus revealer</h1>
+			<h2>Options</h2>
+			<ul>
+				<li><a class="" href="options_console.html">Console</a></li>
+				<li><a class="" href="options_border.html">Border</a></li>
+	                	<li><a class="" href="options_highlight.html">Highlight</a></li>
+        		        <li><a class="active" href="#">About</a></li>
+        	        	<li><img src="../icons/logo.png" alt=""/></li>
+			</ul>
+		</div>
 
 		<div class="content">
             <h1>About</h1>
 
-            <h3>General</h3>
+            <h2>General</h2>
             <p>This Firefox Web extension is designed to easily get the focused element the way you want. You can have details about the focussed element using the Web console, a border or by highlighting the element.</p>
             <br />
 
-            <h3>Technical</h3>
-            <p>Programing languages :</p>
+            <h2>Technical</h2>
+            <p>Programing languages:</p>
             <ul>
                 <li>JavaScript</li>
                 <li>JSON</li>
@@ -38,7 +38,7 @@
                 <li>CSS</li>
             </ul>
 
-            <h3>Developer </h3>
+            <h2>Developer </h2>
             <p>
                 Maxim Perry <br />
                 ESDC - Employment and Social Development Canada <br />
@@ -46,76 +46,6 @@
             </p>
         </div>
 	
-		<style>
-			body {
-				margin: 0;
-				background-color: #f6f6f6;
-				border: 1px solid black;
-                /*height : 300px;*/
-			}
-			header {
-				margin: 0;
-			}
-			header ul {
-				list-style-type: none;
-				margin: 0;
-				padding: 10px;
-				padding-top: 20px;
-				max-width: 250px;
-				background-color: #E8E8E8;
-				position: fixed;
-				overflow: auto;
-                height: 99%;
-                box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                width: 190px;
-			}
-
-			li a {
-				display: block;
-				color: #000;
-				padding: 8px 16px;
-				text-decoration: none;
-				font-family:Verdana, Geneva, sans-serif;
-                transition: background-color 0.5s, color 0.5s;
-			}
-
-			li a.active {
-				background-color: #4CAF50;
-				color: white;
-			}
-
-			li a:hover {
-				background-color: #555;
-				color: white;
-			} h1, h2, h3, h4 {
-				font-family:Century Gothic, Verdana, Geneva, sans-serif;
-				margin: 0;
-			}
-              
-              a {
-                  color: #4CAF50;
-                  text-decoration: none;
-              }
-			.content {
-				padding-top : 5px;
-				margin-left: 210px;
-			}
-            label {
-                font-family:Century Gothic, Verdana, Geneva, sans-serif;
-            }
-          
-            p {
-                margin-bottom:0;
-                font-family:Century Gothic, Verdana, Geneva, sans-serif;
-                font-size: 14px;
-            }
-            
-            img {
-                width: 170px;
-                position: fixed;
-                bottom: 10px;
-            }
-		</style>
-        <script src="script.js"></script>
+       <script src="script.js"></script>
 	</body>
 </html>

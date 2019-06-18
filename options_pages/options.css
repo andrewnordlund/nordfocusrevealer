@@ -1,0 +1,74 @@
+body {
+	margin: 0;
+	background-color: #f6f6f6;
+	border: 1px solid black;
+	height : 300px;
+}
+header {
+	margin: 0;
+}
+#leftPanel {
+	margin: 0;
+	padding: 10px;
+	padding-top: 20px;
+	max-width: 250px;
+	background-color: #E8E8E8;
+	position: fixed;
+	overflow: auto;
+	height: 99%;
+	box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	width: 190px;
+}
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+li a {
+	display: block;
+	color: #000;
+	padding: 8px 16px;
+	text-decoration: none;
+	font-family:Verdana, Geneva, sans-serif;
+	transition: background-color 0.5s, color 0.5s;
+}
+
+li a.active {
+	background-color: #4CAF50;
+	color: white;
+}
+
+li a:hover {
+	background-color: #555;
+	color: white;
+}
+h1, h2, h3, h4 {
+	font-family:Century Gothic, Verdana, Geneva, sans-serif;
+	margin: 0;
+}
+.content {
+	padding-top : 5px;
+	margin-left: 210px;
+}
+label {
+	font-family:Century Gothic, Verdana, Geneva, sans-serif;
+}
+button {
+	background-color: #555 ;
+	color: white ;
+	padding: 10px;
+	font-family:Century Gothic, Verdana, Geneva, sans-serif;
+	text-decoration: none;
+	padding-left: 50px;
+	padding-right: 50px;
+	border: none;
+	position: absolute;
+	top: 250px;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+img {
+	width: 170px;
+	position: fixed;
+	bottom: 10px;
+}

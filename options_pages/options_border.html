@@ -5,112 +5,38 @@
 		<title>Option page</title>
 		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
 		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="Stylesheet" href="options.css">
+		<script src="/libs/nordFocusReveal.js"></script>
 	</head>
 	
 	<body>
-		<header>
+		<div id="leftPanel">
+			<h1>Focus revealer</h1>
+			<h2>Options</h2>
 			<ul>
-				<li><img /></li>
-				<li><h3>Focus revealer</h3></li>
-				<li><h1>Options</h1></li>
-				<hr>
 				<li><a class="" href="options_console.html">Console</a></li>
 				<li><a class="active" href="#">Border</a></li>
-                <li><a class="#" href="options_highlight.html">Highlight</a></li>
-                <li><a class="#" href="options_about.html">About</a></li>
-                <li><img src="../icons/logo.png" /></li>
+	                	<li><a class="" href="options_highlight.html">Highlight</a></li>
+        		        <li><a class="" href="options_about.html">About</a></li>
+        	        	<li><img src="../icons/logo.png" alt=""/></li>
 			</ul>
-		</header>
+		</div>
 
 		<div class="content">
             <form id="form">
-                <h3>Border</h3>
-                <label><input id="show_border" type="checkbox" value="checked" checked />Show border<br /></label>
-                <label>Border color : <input type="text" id="border_color" value="red" /></label><br />
-                <p>Border type :</p>
-                <label><input type="radio" id="border_solid" name="borderType" value="checked" checked/>Solid</label><br />
-                <label><input type="radio" id="border_dashed" name="borderType" value="unchecked" />Dashed</label><br />
-                <label><input type="radio" id="border_dotted" name="borderType" value="unchecked"/>Dotted</label><br />
-
+                <h2>Border</h2>
+                <input id="show_border" type="checkbox" value="checked" checked /><label for="show_border">Show border</label>
+                <label for="border_color">Border color:</label> <input type="text" id="border_color" value="red" />
+		<fieldset>
+                <legend>Border type:</legend>
+                <input type="radio" id="border_solid" name="borderType" value="checked" checked/><label for="border_solid">Solid</label><br />
+                <input type="radio" id="border_dashed" name="borderType" value="unchecked" /><label for="border_dashed">Dashed</label><br />
+                <input type="radio" id="border_dotted" name="borderType" value="unchecked"/><label for="border_dotted">Dotted</label><br />
+		</fieldset>
                 <button type="submit">Save</button>
             </form>
         </div>
-	
-		<style>
-			body {
-				margin: 0;
-				background-color: #f6f6f6;
-				border: 1px solid black;
-                height : 300px;
-			}
-			header {
-				margin: 0;
-			}
-			ul {
-				list-style-type: none;
-				margin: 0;
-				padding: 10px;
-				padding-top: 20px;
-				max-width: 250px;
-				background-color: #E8E8E8;
-				position: fixed;
-				overflow: auto;
-                height: 99%;
-                box-shadow: 0 0px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-                width: 190px;
-			}
+	<script src="options_border.js"></script>
 
-			li a {
-				display: block;
-				color: #000;
-				padding: 8px 16px;
-				text-decoration: none;
-				font-family:Verdana, Geneva, sans-serif;
-                transition: background-color 0.5s, color 0.5s;
-			}
-
-			li a.active {
-				background-color: #4CAF50;
-				color: white;
-			}
-
-			li a:hover {
-				background-color: #555;
-				color: white;
-			} h1, h2, h3, h4 {
-				font-family:Century Gothic, Verdana, Geneva, sans-serif;
-				margin: 0;
-			}
-			.content {
-				padding-top : 5px;
-				margin-left: 210px;
-			}
-            label {
-                font-family:Century Gothic, Verdana, Geneva, sans-serif;
-            }
-            button {
-                background-color: #555 ;
-                color: white ;
-                padding: 10px;
-                font-family:Century Gothic, Verdana, Geneva, sans-serif;
-                text-decoration: none;
-                padding-left: 50px;
-                padding-right: 50px;
-                border: none;
-                position: absolute;
-                top: 250px;
-                box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-            }
-            p {
-                margin-bottom:0;
-                font-family:Century Gothic, Verdana, Geneva, sans-serif;
-            }
-            img {
-                width: 170px;
-                position: fixed;
-                bottom: 10px;
-            }
-		</style>
-        <script src="options_border.js"></script>
 	</body>
-</html>
+		</html>
