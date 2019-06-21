@@ -6,9 +6,14 @@ nordFocusReveal = {
 	loaded : false,
 	postLoad : [],
 	options : {
+		"consoleOutput":true,
+		"consoleDebug":false,
+		"consoleAlert":false,
+		/*
 		"OutputToConsole" : true,
 		"ConsoleDebug" : false,
 		"DisplayAlerts" : false,
+		*/
 
 		"ShowBorder" : true,
 		"BorderColor" : "red",
