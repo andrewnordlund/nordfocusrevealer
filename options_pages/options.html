@@ -1,0 +1,61 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Options</title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="Stylesheet" href="options.css">
+		<script src="/libs/nordFocusReveal.js"></script>
+	</head>
+	
+	<body>
+		<div id="leftPanel">
+			<h1>Focus Revealer Options</h1>
+			<ul>
+				<li><a class="" id="consoleA" href="#">Console</a></li>
+				<li><a class="" id="borderA" href="#">Border</a></li>
+	                	<li><a class="" id="highlightA" href="#">Highlight</a></li>
+        		        <li><a class="" id="aboutA" href="#">About</a></li>
+        	        	<li><img src="../icons/logo.png" alt="WS CoE"/></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			<form id="form">
+			<section id="consoleSec" class="show">
+				<h2>Console</h2>
+				<div class="fieldHolder">
+					<label><input id="console_output" type="checkbox" checked />Output to console<br /></label>
+				<div class="fieldHolder">
+				</div>
+					<label><input id="console_debug" type="checkbox"/>Debug<br /></label>
+				</div>
+				<div class="fieldHolder">
+					<label><input id="console_alert" type="checkbox"/>Display alerts<br /></label>
+				</div>
+				
+			<p>*This developer extension is designed to easily get the focused element. Open the console to have more information (Ctrl + Shift + J).</p>
+			</section>
+			<section id="consoleSec" class="hide">
+				<h2>Border</h2>
+				
+			</section>
+			<section id="highlightSec" class="hide">
+	               		<h2>Highlight</h2>
+				<div class="fieldHolder">
+			                <label><input id="show_highLight" type="checkbox"  />Show highlight<br /></label>
+        	       			<label>Highlight color : <input type="text" id="highLight_color" disabled value="#ececec" /></label><br />
+				</div>
+			<section>
+			<section id="aboutSec" class="hide">
+				<h2>About</h2>
+				
+			</section>
+	                <button id="submitBtn">Save</button>
+			</form>
+		</div>
+	
+		        <script src="options.js"></script>
+	</body>
+</html>

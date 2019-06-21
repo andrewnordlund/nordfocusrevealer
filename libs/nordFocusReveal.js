@@ -62,6 +62,9 @@ nordFocusReveal = {
 			if (success) success();
 		}, failure);
 	}, // End of loadOptions
+	saveOptions : function (success, failure) {
+		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
+	}, // End of saveOptions
 	setLoaded : function () {
 		nordFocusReveal.loaded = true;
 		nordFocusReveal.afterLoad();

@@ -64,6 +64,7 @@ function RestoreOptions(eventThatHappened) {
 }
 
 //Check and uncheck
+/*
 function isCheckedConsole() {
     if (console_output.checked) {
         console_output.value = "checked";
@@ -85,13 +86,6 @@ function isCheckedAlerts() {
         console_alert.value = "unchecked";
     }
 }
-document.onchange = function () {
-    if (console_output.checked) {
-        console_debug.removeAttribute("disabled");
-    } else {
-        console_debug.setAttribute("disabled", "true");
-    }
-};
 
 function check() {
     if (console_output.checked) {
@@ -100,7 +94,14 @@ function check() {
         console_debug.setAttribute("disabled", "true");
     }
 }
-
+document.onchange = function () {
+    if (console_output.checked) {
+        console_debug.removeAttribute("disabled");
+    } else {
+        console_debug.setAttribute("disabled", "true");
+    }
+};
+*/
 // Fade out animation
 // WCAG Violation here.  
 /*
@@ -119,4 +120,3 @@ function fadeOut() {
 }
 */
 document.addEventListener("DOMContentLoaded", RestoreOptions);
-document.getElementById("form").addEventListener("submit", SaveOptions);

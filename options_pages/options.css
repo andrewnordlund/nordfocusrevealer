@@ -50,6 +50,7 @@ h1, h2, h3, h4 {
 .content {
 	padding-top : 5px;
 	margin-left: 210px;
+overflow: scroll;
 }
 label {
 	font-family:Century Gothic, Verdana, Geneva, sans-serif;
@@ -71,4 +72,12 @@ img {
 	width: 170px;
 	position: fixed;
 	bottom: 10px;
+}
+
+.show {
+display: block;
+}
+
+.hide {
+display: none;
 }

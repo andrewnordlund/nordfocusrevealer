@@ -32,7 +32,7 @@
   "manifest_version": 2,
   "name": "Nordburg Focus Revealer",
   "options_ui": {
-    "page": "options_pages/options_console.html",
+    "page": "options_pages/options.html",
     "browser_style": true
   },
   "permissions": [
