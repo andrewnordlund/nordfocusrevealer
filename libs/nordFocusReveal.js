@@ -15,18 +15,19 @@ nordFocusReveal = {
 		"DisplayAlerts" : false,
 		*/
 
-		"ShowBorder" : true,
-		"BorderColor" : "red",
-		"BorderType" : "solid",
+		"showBorder" : true,
+		"borderColor" : "red",
+		"borderType" : "dashed",
 
-		"ShowHighlight" : false,
-		"HightlightColor" : "gray"
+		"showHighlight" : false,
+		"hightlightColor" : "gray",
 		"dbug": nordFocusReveal.dbug,
 	},
 	init : function () {
 		// Something may need to go here at some point
 	}, // End of init
-	initGenderCounts : function () {
+	countObjs : function (obj) {
+
 	}, // End of initGenderCounts
 	loadOptions : function (success, failure) {
 		if (nordFocusReveal.dbug) console.log ("Loading Options.");
@@ -36,7 +37,8 @@ nordFocusReveal = {
 			
 			if (nordFocusReveal.dbug) console.log ("Got stored options.");
 
-			if (nordburg.countObjs(savedObj) == 0) {
+			
+			if (Object.keys(savedObj).length === 0 && savedObj.constructor === Object) {
 				if (nordFocusReveal.dbug) console.log ("There ain't nothing there.");
 			} else {
 				if (nordFocusReveal.dbug) console.log ("Got saved options.");

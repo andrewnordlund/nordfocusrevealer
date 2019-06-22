@@ -3,6 +3,7 @@ body {
 	background-color: #f6f6f6;
 	border: 1px solid black;
 	height : 300px;
+	overflow: scroll;
 }
 header {
 	margin: 0;
@@ -50,7 +51,8 @@ h1, h2, h3, h4 {
 .content {
 	padding-top : 5px;
 	margin-left: 210px;
-overflow: scroll;
+	overflow: scroll;
+height: 80%;
 }
 label {
 	font-family:Century Gothic, Verdana, Geneva, sans-serif;
@@ -65,7 +67,7 @@ button {
 	padding-right: 50px;
 	border: none;
 	position: absolute;
-	top: 250px;
+	top: 85%;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 img {
