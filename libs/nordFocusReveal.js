@@ -2,7 +2,7 @@ if (typeof (nordFocusReveal) == "undefined") {
 	var nordFocusReveal = {};
 }
 nordFocusReveal = {
-	dbug : true,
+	dbug : false,
 	loaded : false,
 	postLoad : [],
 	options : {

@@ -36,7 +36,7 @@ li a {
 }
 
 li a.active {
-	background-color: #4CAF50;
+	background-color: #348636;
 	color: white;
 }
 
@@ -47,6 +47,15 @@ li a:hover {
 h1, h2, h3, h4 {
 	font-family:Century Gothic, Verdana, Geneva, sans-serif;
 	margin: 0;
+}
+a#slashonA, a#nordburgA {
+	color: #2655FF;
+	text-decoration: underline;
+}
+a#slashonA:hover, a#nordburgA:hover {
+	color: #2655FF;
+	text-decoration: none;
+	background-color: inherit;
 }
 .content {
 	padding-top : 5px;
