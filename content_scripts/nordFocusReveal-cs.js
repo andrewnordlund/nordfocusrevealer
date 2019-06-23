@@ -9,7 +9,7 @@ nordFocusRevealCS = {
 		nordFocusRevealCS.elementOnFocus = null;
 		nordFocusReveal.getFocusedItem();
 
-		var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : "No id") + ") has focus");
+		var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString(); // + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : "No id") + ") has focus";
 		if (nordFocusReveal.options["OutputToConsole"] === true) console.log (output);
 		if (nordFocusReveal.options["DisplayAlerts"] === true) alert (output);
 		
@@ -45,7 +45,7 @@ nordFocusRevealCS = {
 var listener = function (message, sender, sendResponse) {
 	if (nordFocusRevealCS.dbug) console.log ("Listening with dbug: " + nordFocusRevealCS.dbug + ".");
 	
-	if (nordFocusRevealCS.dbug) console.log ("Before starting the scan...");
+	if (nordFocusRevealCS.dbug) console.log ("Before starting the scan..." + message["task"]);
 	if (message["task"] == "reveal") {
 		nordFocusReveaCS.run();
 	}
@@ -235,3 +235,5 @@ function checkUser(e) {
 }
 browser.runtime.onConnect.addListener(nordFocusReveal.getFocusItem);
 */
+
+if (!browser.storage.onChanged.hasListener(nordFocusReveal.loadOptions)) browser.storage.onChanged.addListener(nordFocusReveal.loadOptions);

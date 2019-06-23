@@ -2,22 +2,17 @@ if (typeof (nordFocusReveal) == "undefined") {
 	var nordFocusReveal = {};
 }
 nordFocusReveal = {
-	dbug : false,
+	dbug : true,
 	loaded : false,
 	postLoad : [],
 	options : {
-		"consoleOutput":true,
+		"consoleOutput":false,
 		"consoleDebug":false,
 		"consoleAlert":false,
-		/*
-		"OutputToConsole" : true,
-		"ConsoleDebug" : false,
-		"DisplayAlerts" : false,
-		*/
-
+		
 		"showBorder" : true,
 		"borderColor" : "red",
-		"borderType" : "dashed",
+		"borderType" : "Solid",
 
 		"showHighlight" : false,
 		"hightlightColor" : "gray",
@@ -39,7 +34,25 @@ nordFocusReveal = {
 
 			
 			if (Object.keys(savedObj).length === 0 && savedObj.constructor === Object) {
-				if (nordFocusReveal.dbug) console.log ("There ain't nothing there.");
+				if (nordFocusReveal.dbug) console.log ("There ain't nothing there.  Checking for old values.");
+				// Check for old values
+				var gettingOld = browser.storage.local.get({"OutputToConsole":false, "ConsoleDebug":false, "DisplayAlerts":false, "ShowBorder":true, "BorderColor":"red", "BorderType":"Solid", "ShowHighlight":false, "HightlightColor":"gray"});
+				gettingOld.then(function (savedObj) {
+					nordFocusReveal.options["consoleOutput"] = savedObj["OutputToConsole"];
+					nordFocusReveal.options["consoleDebug"] = savedObj["ConsoleDebug"];
+					nordFocusReveal.options["consoleAlert"] = savedObj["DisplayAlerts"];
+					nordFocusReveal.options["showBorder"] = savedObj["ShowBorder"];
+					nordFocusReveal.options["borderColor"] = savedObj["BorderColor"];
+					nordFocusReveal.options["borderType"] = savedObj["BorderType"];
+					nordFocusReveal.options["showHighlight"] = savedObj["ShowHighlight"];
+					nordFocusReveal.options["highlightColor"] = savedObj["HightlightColor"];
+					
+					nordFocusReveal.saveOptions(function() {
+						browser.storage.local.remove(["OutputToConsole", "ConsoleDebug", "DisplayAlerts", "ShowBorder", "BorderColor", "BorderType", "ShowHighlight", "HightlightColor"]).then(function() {
+							//nordFocusReveal.dbug = 
+						}, nordFocusReveal.errorFun);
+					}, nordFocusReveal.errorFun);
+				}, nordFocusReveal.errorFun);
 			} else {
 				if (nordFocusReveal.dbug) console.log ("Got saved options.");
 				if (savedObj.hasOwnProperty("options")) savedObj = savedObj["options"];
@@ -70,7 +83,13 @@ nordFocusReveal = {
 		}, failure);
 	}, // End of loadOptions
 	saveOptions : function (success, failure) {
+		if (nordFocusReveal.dbug) {
+			for (let k in nordFocusReveal.options) {
+				console.log (`${k}: ${nordFocusReveal.options[k]}.`);
+			}
+		}
 		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
+		saving.then(success, failure);
 	}, // End of saveOptions
 	setLoaded : function () {
 		nordFocusReveal.loaded = true;

@@ -37,7 +37,7 @@ nordFocusRevealOpts = {
 		nordFocusRevealOpts.els["saveBtn"].addEventListener("click", 
 			function () {
 				nordFocusRevealOpts.gatherInputs();
-				//nordFocusReveal.saveOptions(null, nordFocusReveal.errorFun);
+				nordFocusReveal.saveOptions(null, nordFocusReveal.errorFun);
 			}, false);
 		nordFocusRevealOpts.setupLinks();
 		nordFocusRevealOpts.fillInputs();
@@ -54,7 +54,7 @@ nordFocusRevealOpts = {
 		// Border
 		nordFocusRevealOpts.inputs["showBorderChk"].checked =  nordFocusReveal.options["showBorder"];
 		nordFocusRevealOpts.inputs["borderColorTxt"].setAttribute("value", nordFocusReveal.options["borderColor"]);
-		//nordFocusRevealOpts.inputs["borderTypeRdo"].checked : nordFocusReveal.options["borderColor"];
+		nordFocusRevealOpts.inputs["border" + nordFocusReveal.options["borderType"] + "Rdo"].checked = nordFocusReveal.options["borderColor"];
 
 		// Highlight
 		nordFocusRevealOpts.inputs["showHighlightChk"].checked = nordFocusReveal.options["showHighlight"];
@@ -62,10 +62,19 @@ nordFocusRevealOpts = {
 
 	}, // End of fillInputs
 	gatherInputs : function() {
-		for (let ins in nordFocusRevealOpts.inputs) {
-			let val = nordFocusRevealOpts.inputs[ins].checked;
-			console.log(`GatherInputs: for ${ins}: ${val}.`);
-		}
+		// Console
+		nordFocusReveal.options["consoleOutput"] = nordFocusRevealOpts.inputs["consoleOutputChk"].checked;
+		nordFocusReveal.options["consoleDebug"] = nordFocusRevealOpts.inputs["consoleDebugChk"].checked;
+		nordFocusReveal.options["consoleAlert"] = nordFocusRevealOpts.inputs["consoleAlertChk"].checked;
+
+		// Border
+		nordFocusReveal.options["showBorder"] = nordFocusRevealOpts.inputs["showBorderChk"].checked;
+		nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
+		nordFocusReveal.options["borderType"] = (nordFocusRevealOpts.inputs["borderDottedRdo"].checked ? "Dotted" : (nordFocusRevealOpts.inputs["borderDashedRdo"].checked ? "Dashed" : "Solid")) ;
+
+		// Highlight
+		nordFocusReveal.options["showHighlight"] = nordFocusRevealOpts.inputs["showHighlightChk"].checked;
+		nordFocusReveal.options["hightlightColor"] = nordFocusRevealOpts.inputs["highlightColorTxt"].value;
 	}, // End of gatherInputs
 	setupLinks : function () {
 		for (let p in nordFocusRevealOpts.parts) {

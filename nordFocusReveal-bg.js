@@ -3,7 +3,7 @@ if (typeof (nordFocusRevealBG) == "undefined") {
 }
 
 nordFocusRevealBG = {
-	dbug : false;
+	dbug : false,
 	/*isInjected : false,*/
 	check : function () {
 		var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
@@ -42,4 +42,4 @@ nordFocusRevealBG = {
 	}
 	*/
 }
-browser.browserAction.onClicked.addListener(nordFocusReveal.check);
+browser.browserAction.onClicked.addListener(nordFocusRevealBG.check);
