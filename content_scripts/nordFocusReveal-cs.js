@@ -7,24 +7,33 @@ nordFocusRevealCS = {
 	elementOnFocus : null,
 	run : function () {
 		nordFocusRevealCS.elementOnFocus = null;
-		nordFocusReveal.getFocusedItem();
+		nordFocusRevealCS.getFocusedItem();
+
+		if (nordFocusRevealCS.dbug) console.log("Got the focused item.  Now to reveal it to all.");
 
 		var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString(); // + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : "No id") + ") has focus";
-		if (nordFocusReveal.options["OutputToConsole"] === true) console.log (output);
-		if (nordFocusReveal.options["DisplayAlerts"] === true) alert (output);
+		var log = [];
+		for (let k in nordFocusReveal.options) log.push(k + ": " + nordFocusReveal.options[k]);
+		console.log (log.join(", "));
+
+		if (nordFocusRevealCS.dbug) console.log("consoleOutput: " + nordFocusReveal.options["consoleOutput"] + ".");
+		if (nordFocusReveal.options["consoleOutput"] == true) console.log (output);
+		if (nordFocusReveal.options["consoleAlert"] == true) alert (output);
 		
-		if (nordFocusReveal.options["ShowBorder"] === true) nordFocusRevealCS.showBorder();
+		if (nordFocusReveal.options["showBorder"] == true) nordFocusRevealCS.showBorder();
 		
-		if (nordFocusReveal.options["ShowHighlight"] === true) nordFocusRevealCS.showHighlight();
+		if (nordFocusReveal.options["showHighlight"] == true) nordFocusRevealCS.showHighlight();
 
 	}, // End of getFocusItem
 	getFocusedItem: function () {
         	if (nordFocusRevealCS.dbug) console.log("Getting focused item");
 	        nordFocusRevealCS.elementOnFocus = document.activeElement;
+        	if (nordFocusRevealCS.dbug) console.log("Got focused item");
+        	if (nordFocusRevealCS.dbug) console.log("Focused item: " + nordFocusRevealCS.elementOnFocus + ".");
 	}, // End of getFocusItem
 	
 	showBorder : function () {
-		var oldborder = nordFocusRevealCS.elementOnFocus.border.style;
+		var oldborder = nordFocusRevealCS.elementOnFocus.style.border;
 		if (nordFocusRevealCS.dbug) console.log ("Old background: " + oldborder + ".");
 		nordFocusRevealCS.elementOnFocus.style.border = "8px " + nordFocusReveal.options["borderType"] + " " + nordFocusReveal.options["borderColor"];
 	        setTimeout(function () {
@@ -34,7 +43,7 @@ nordFocusRevealCS = {
 	showHighlight : function () {
 		var oldbackground = nordFocusRevealCS.elementOnFocus.style.backgroundColor;
 		if (nordFocusRevealCS.dbug) console.log ("Old background: " + oldbackground + ".");
-		elementOnFocus.style.backgroundColor = nordFocusReveal.options["HightlightColor"];
+		elementOnFocus.style.backgroundColor = nordFocusReveal.options["hightlightColor"];
 		setTimeout(function () {
 			nordFocusRevealCS.elementOnFocus.style.backgroundColor = oldbackground;
 		}, 250);
@@ -47,7 +56,7 @@ var listener = function (message, sender, sendResponse) {
 	
 	if (nordFocusRevealCS.dbug) console.log ("Before starting the scan..." + message["task"]);
 	if (message["task"] == "reveal") {
-		nordFocusReveaCS.run();
+		nordFocusRevealCS.run();
 	}
 };
 

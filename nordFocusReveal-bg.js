@@ -3,13 +3,13 @@ if (typeof (nordFocusRevealBG) == "undefined") {
 }
 
 nordFocusRevealBG = {
-	dbug : false,
+	dbug : nordFocusReveal.dbug,
 	/*isInjected : false,*/
 	check : function () {
 		var gettingActiveTab = browser.tabs.query({active: true, currentWindow: true});
 		gettingActiveTab.then(function (tabs) {
 			if (nordFocusRevealBG.dbug) console.log ("About to call the content script.");
-			browser.tabs.sendMessage(tabs[0].id, {"task": "popFromWeb"}).catch(function (x) {
+			browser.tabs.sendMessage(tabs[0].id, {"task": "reveal"}).catch(function (x) {
 			if (nordFocusRevealBG.dbug) console.log ("Caught something: " + x.toString());
 				if (x.toString() == "Error: Could not establish connection. Receiving end does not exist.") {
 					//browser.tabs.executeScript(tabs[0].id, {file : "/libs/nordburg.js"}).then (function () {
