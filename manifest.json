@@ -20,7 +20,7 @@
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
-      "js": ["libs/nordFocusReveal.js", "content_scripts/nordFocusReveal-cs.js" ]
+      "js": ["content_scripts/nordFocusReveal-cs.js" ]
     }
   ],
   "description": "Nordburg Focus Revealer",
@@ -40,7 +40,7 @@
     "notifications",
     "storage"
   ],
-  "version": "2.0.0-a1",
+  "version": "2.0.0",
   "author": "Andrew Nordlund and Maxim Perry",
   "web_accessible_resources": [
     "icons/*.png",

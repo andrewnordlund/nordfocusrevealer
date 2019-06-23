@@ -39,6 +39,7 @@ nordFocusRevealOpts = {
 				nordFocusRevealOpts.gatherInputs();
 				nordFocusReveal.saveOptions(null, nordFocusReveal.errorFun);
 			}, false);
+		nordFocusRevealOpts.inputs["showHighlightChk"].addEventListener("change", nordFocusRevealOpts.toggleHighlightTxt, false);
 		nordFocusRevealOpts.setupLinks();
 		nordFocusRevealOpts.fillInputs();
 
@@ -97,6 +98,13 @@ nordFocusRevealOpts = {
 			}
 		}
 	}, // End of toggleSection
+	toggleHighlightTxt : function () {
+		if (nordFocusRevealOpts.inputs["highlightColorTxt"].hasAttribute("disabled")) {
+			nordFocusRevealOpts.inputs["highlightColorTxt"].removeAttribute("disabled");
+		} else {
+			nordFocusRevealOpts.inputs["highlightColorTxt"].setAttribute("disabled", "disabled");
+		}
+	}
 }
 
 if (nordFocusRevealOpts.dbug) console.log ("nordFocusReveal.js loaded");

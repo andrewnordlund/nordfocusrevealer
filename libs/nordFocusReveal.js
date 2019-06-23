@@ -16,10 +16,10 @@ nordFocusReveal = {
 
 		"showHighlight" : false,
 		"hightlightColor" : "gray",
-		"dbug": nordFocusReveal.dbug,
 	},
 	init : function () {
 		// Something may need to go here at some point
+		if (nordFocusReveal.dbug) console.log ("Initing");
 	}, // End of init
 	countObjs : function (obj) {
 
@@ -67,7 +67,7 @@ nordFocusReveal = {
 				for (var opt in nordFocusReveal.options) {
 					if (savedObj.hasOwnProperty(opt)) {
 						nordFocusReveal.options[opt] = savedObj[opt];
-						if (opt == "dbug") {
+						if (opt == "consoleDebug") {
 							nordFocusReveal.dbug = nordFocusReveal.options[opt];
 							//nordburg.dbug = nordFocusReveal.dbug;
 							//console.log ("Setting nord(burg|FocusReveal).dbug to " + nordFocusReveal.dbug + " because opt[dbug] = " + savedObj[opt] + ".");
@@ -77,19 +77,24 @@ nordFocusReveal = {
 
 			}
 
-			//if (nordFocusReveal.dbug) console.log ("Badge is now " + nordFocusReveal.options["badge"] + ".");
+			if (nordFocusReveal.dbug) console.log ("loadOptions::success: " + success + ", typeof: " + typeof success + ".");
 			nordFocusReveal.setLoaded();
-			if (success) success();
+			if (success && success != null && typeof success == "function") success();
 		}, failure);
 	}, // End of loadOptions
 	saveOptions : function (success, failure) {
 		if (nordFocusReveal.dbug) {
 			for (let k in nordFocusReveal.options) {
-				console.log (`${k}: ${nordFocusReveal.options[k]}.`);
+				//console.log (`${k}: ${nordFocusReveal.options[k]}.`);
 			}
 		}
+		nordFocusReveal.dbug = nordFocusReveal.options["consoleDebug"];
 		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
-		saving.then(success, failure);
+		if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
+		saving.then(function () {
+				if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
+				if (success && success != null && typeof success == "function") success();
+			}, failure);
 	}, // End of saveOptions
 	setLoaded : function () {
 		nordFocusReveal.loaded = true;
