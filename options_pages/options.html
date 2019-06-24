@@ -1,0 +1,99 @@
+<!DOCTYPE>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>Options</title>
+		<link rel="icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="shortcut icon" href="favicon.ico" type="image/x-icon"/>
+		<link rel="Stylesheet" href="options.css">
+		<script src="/libs/nordFocusReveal.js"></script>
+	</head>
+	
+	<body>
+		<div id="leftPanel">
+			<h1>Focus Revealer Options</h1>
+			<ul>
+				<li><a class="active" id="consoleA" href="#">Console</a></li>
+				<li><a class="" id="borderA" href="#">Border</a></li>
+	                	<li><a class="" id="highlightA" href="#">Highlight</a></li>
+        		        <li><a class="" id="aboutA" href="#">About</a></li>
+        	        	<li><img src="../icons/logo.png" alt="WS CoE"/></li>
+			</ul>
+		</div>
+
+		<div class="content">
+			<form id="form">
+			<section id="consoleSec" class="show">
+				<h2>Console</h2>
+				<div class="fieldHolder">
+					<label><input id="consoleOutputChk" type="checkbox" checked />Output to console<br /></label>
+				<div class="fieldHolder">
+				</div>
+					<label><input id="consoleDebugChk" type="checkbox"/>Debug<br /></label>
+				</div>
+				<div class="fieldHolder">
+					<label><input id="consoleAlertChk" type="checkbox"/>Display alerts<br /></label>
+				</div>
+				
+			<p>*This developer extension is designed to easily get the focused element. Open the console to have more information (Ctrl + Shift + J).</p>
+			</section>
+			<section id="borderSec" class="hide">
+				<h2>Border</h2>
+				<div class="fieldHolder">
+			                <input id="showBorderChk" type="checkbox" value="checked" checked /><label for="showBorderChk">Show border</label>
+				</div>
+				<div class="fieldHolder">
+        	        		<label for="borderColorTxt">Border color:</label> <input type="text" id="borderColorTxt" value="red" />
+				</div>
+				<fieldset>
+	                		<legend>Border type:</legend>
+					<div class="fieldHolder">
+				                <input type="radio" id="borderSolidRdo" name="borderType" value="checked" checked/><label for="borderSolidRdo">Solid</label>
+					</div>
+					<div class="fieldHolder">
+                				<input type="radio" id="borderDashedRdo" name="borderType" value="unchecked" /><label for="borderDashedRdo">Dashed</label>
+					</div>
+					<div class="fieldHolder">
+						<input type="radio" id="borderDottedRdo" name="borderType" value="unchecked"/><label for="borderDottedRdo">Dotted</label>
+					</div>
+				</fieldset>
+			</section>
+			<section id="highlightSec" class="hide">
+	               		<h2>Highlight</h2>
+				<div class="fieldHolder">
+			                <label><input id="showHighlightChk" type="checkbox"  />Show highlight</label>
+				</div>
+				<div class="fieldHolder">
+        	       			<label>Highlight color : <input type="text" id="highlightColorTxt" disabled value="#ececec" /></label>
+				</div>
+			</section>
+			<section id="aboutSec" class="hide">
+				<h2>About</h2>
+				<h3>General</h3>
+				<p>This Firefox Web extension is designed to easily get the focused element the way you want. You can have details about the focussed element using the Web console, a border or by highlighting the element.</p>
+				<h3>Technical</h3>
+				<p>Programing languages:</p>
+				<ul>
+					<li>JavaScript</li>
+					<li>JSON</li>
+					<li>HTML</li>
+					<li>CSS</li>
+				</ul>
+
+				<h3>Developers</h3>
+				<ul>
+					<li>Maxim Perry <br />ESDC - Employment and Social Development Canada <br />
+					Developer's website: <a href="#" id="slashonA">www.slashon.ca</a></li>
+					<li>Andrew Nordlund <br />ESDC - Employment and Social Development Canada <br />
+					Developer's website: <a href="#" id="nordburgA">www.nordburg.ca</a></li>
+				</ul>
+			</section>
+			<section id="saveBtnHolder">
+		                <button id="saveBtn" type="button">Save</button>
+			</section>
+			</form>
+		</div>
+	
+		        <script src="options.js"></script>
+	</body>
+</html>
