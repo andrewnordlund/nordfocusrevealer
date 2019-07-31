@@ -48,4 +48,3 @@ let changeHandler = function () {
 	nordFocusReveal.loadOptions(function () {nordFocusRevealBG.dbug = nordFocusReveal.options["consoleDebug"];}, nordFocusReveal.errorFun);
 }
 if (!browser.storage.onChanged.hasListener(changeHandler)) browser.storage.onChanged.addListener(changeHandler);
->>>>>>> cb2ce7c214fbc1738d38c07b2fcd3cbac0421094

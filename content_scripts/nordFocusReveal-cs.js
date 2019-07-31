@@ -83,12 +83,12 @@ nordFocusRevealCS = {
 			returnValue = pn.nodeName + "#" + pn.getAttribute("id") + " > " + n.nodeName;
 		} else if (pn.hasAttribute("name")) {
 			returnValue = pn.nodeName + ":name: " + pn.hasAttribute("name") + " > " + n.nodeName;
-		} else if (n.nodeName.match(/body/i)) {
+		} else if (n.nodeName.match(/^body$/i)) {
 			returnValue = "body";
-		} else if (pn.nodeName.match(/body/i)) {
+		} else if (pn.nodeName.match(/^body$/i)) {
 			returnValue = "body" + " > " + n.nodeName;
 		} else {
-			returnValue = nordFocusRevealCS.getParentWithID(pn) + "> " + n.nodeName;
+			returnValue = nordFocusRevealCS.getParentWithID(pn) + " > " + n.nodeName;
 		}
 		return returnValue;
 	}, // End of getParentWithID
