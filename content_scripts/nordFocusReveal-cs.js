@@ -5,6 +5,7 @@ if (typeof (nordFocusRevealCS) == "undefined") {
 nordFocusRevealCS = {
 	dbug : false,
 	elementOnFocus : null,
+	elementOnFocusStyle : null,
 	options : {
 		"consoleOutput":false,
 		"consoleDebug":false,
@@ -16,6 +17,8 @@ nordFocusRevealCS = {
 
 		"showHighlight" : false,
 		"hightlightColor" : "gray",
+		
+		"duration" : 250,
 	},
 	run : function () {
 		nordFocusRevealCS.elementOnFocus = null;
@@ -37,7 +40,7 @@ nordFocusRevealCS = {
 
 			if (nordFocusRevealCS.dbug) console.log("Got the focused item.  Now to reveal it to all.");
 
-			var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + ")" + nodeText + " has focus.";
+			var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText + " has focus.";
 			if (nordFocusRevealCS.dbug) {
 				var log = [];
 				for (let k in nordFocusRevealCS.options) log.push(k + ": " + nordFocusRevealCS.options[k]);
@@ -56,26 +59,27 @@ nordFocusRevealCS = {
 	getFocusedItem: function () {
         	if (nordFocusRevealCS.dbug) console.log("Getting focused item");
 	        nordFocusRevealCS.elementOnFocus = document.activeElement;
+		nordFocusRevealCS.elementOnFocusStyle  = nordFocusRevealCS.elementOnFocus.getAttribute("style");
         	if (nordFocusRevealCS.dbug) console.log("Got focused item");
         	if (nordFocusRevealCS.dbug) console.log("Focused item: " + nordFocusRevealCS.elementOnFocus + ".");
+		if (nordFocusRevealCS.dbug) console.log ("Old style: " + nordFocusRevealCS.elementOnFocusStyle + ".");
 	}, // End of getFocusItem
 	
 	showBorder : function () {
-		var oldborder = nordFocusRevealCS.elementOnFocus.style.border;
-		if (nordFocusRevealCS.dbug) console.log ("Old border: " + oldborder + ".");
 		nordFocusRevealCS.elementOnFocus.style.border = "8px " + nordFocusRevealCS.options["borderType"] + " " + nordFocusRevealCS.options["borderColor"];
-	        setTimeout(function () {
-        		nordFocusRevealCS.elementOnFocus.style.border = oldborder;
-	        }, 250);
+	        setTimeout(nordFocusRevealCS.resetStyle, 250);
 	}, // End of showBorder
 	showHighlight : function () {
-		var oldbackground = nordFocusRevealCS.elementOnFocus.style.backgroundColor;
-		if (nordFocusRevealCS.dbug) console.log ("Old background: " + oldbackground + ".");
 		nordFocusRevealCS.elementOnFocus.style.backgroundColor = nordFocusRevealCS.options["hightlightColor"];
-		setTimeout(function () {
-			nordFocusRevealCS.elementOnFocus.style.backgroundColor = oldbackground;
-		}, 250);
+		setTimeout(nordFocusRevealCS.resetStyle, 250);
 	}, // End of showHighlight
+	resetStyle : function () {
+		if (nordFocusRevealCS.elementOnFocusStyle) {
+			nordFocusRevealCS.elementOnFocus.setAttribute("style", nordFocusRevealCS.elementOnFocusStyle);
+		} else {
+			nordFocusRevealCS.elementOnFocus.removeAttribute("style");
+		}
+	}, // End of resetStyle
 	getParentWithID : function (n) {
 		var pn = n.parentNode;
 		var returnValue = "";
