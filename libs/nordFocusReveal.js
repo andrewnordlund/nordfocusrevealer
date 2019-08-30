@@ -16,6 +16,8 @@ nordFocusReveal = {
 
 		"showHighlight" : false,
 		"hightlightColor" : "gray",
+		
+		"duration" : 250,
 	},
 	init : function () {
 		// Something may need to go here at some point
