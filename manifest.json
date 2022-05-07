@@ -1,4 +1,8 @@
 {
+  "name": "Nordburg Focus Revealer",
+  "version": "2.1.0",
+  "author": "Andrew Nordlund and Maxim Perry",
+  "manifest_version": 2,
   "applications": {
     "gecko": {
       "id": "nordFocusReveal@nordburg.ca",
@@ -17,6 +21,13 @@
       "38": "icons/nordFocusReveal-38.png"
     }
   },
+  "commands": {
+    "_execute_browser_action": {
+      "suggested_key": {
+        "default": "Alt+Shift+F"
+      }
+    }
+  },
   "content_scripts": [
     {
       "matches": [ "<all_urls>" ],
@@ -29,8 +40,6 @@
     "48": "icons/nordFocusReveal-48.png",
     "96": "icons/nordFocusReveal-96.png"
   },
-  "manifest_version": 2,
-  "name": "Nordburg Focus Revealer",
   "options_ui": {
     "page": "options_pages/options.html",
     "browser_style": true
@@ -40,8 +49,6 @@
     "notifications",
     "storage"
   ],
-  "version": "2.0.5",
-  "author": "Andrew Nordlund and Maxim Perry",
   "web_accessible_resources": [
     "icons/*.png",
     "*.html",
