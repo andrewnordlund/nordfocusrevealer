@@ -29,7 +29,7 @@ nordFocusReveal = {
 	loadOptions : function (success, failure) {
 		if (nordFocusReveal.dbug) console.log ("Loading Options.");
 		
-		var getting = browser.storage.local.get("options");
+		var getting = chrome.storage.local.get("options");
 		getting.then(function (savedObj) {
 			
 			if (nordFocusReveal.dbug) console.log ("Got stored options.");
@@ -38,7 +38,7 @@ nordFocusReveal = {
 			if (Object.keys(savedObj).length === 0 && savedObj.constructor === Object) {
 				if (nordFocusReveal.dbug) console.log ("There ain't nothing there.  Checking for old values.");
 				// Check for old values
-				var gettingOld = browser.storage.local.get({"OutputToConsole":false, "ConsoleDebug":false, "DisplayAlerts":false, "ShowBorder":true, "BorderColor":"red", "BorderType":"Solid", "ShowHighlight":false, "HightlightColor":"gray"});
+				var gettingOld = chrome.storage.local.get({"OutputToConsole":false, "ConsoleDebug":false, "DisplayAlerts":false, "ShowBorder":true, "BorderColor":"red", "BorderType":"Solid", "ShowHighlight":false, "HightlightColor":"gray"});
 				gettingOld.then(function (savedObj) {
 					nordFocusReveal.options["consoleOutput"] = savedObj["OutputToConsole"];
 					nordFocusReveal.options["consoleDebug"] = savedObj["ConsoleDebug"];
@@ -50,7 +50,7 @@ nordFocusReveal = {
 					nordFocusReveal.options["highlightColor"] = savedObj["HightlightColor"];
 					
 					nordFocusReveal.saveOptions(function() {
-						browser.storage.local.remove(["OutputToConsole", "ConsoleDebug", "DisplayAlerts", "ShowBorder", "BorderColor", "BorderType", "ShowHighlight", "HightlightColor"]).then(function() {
+						chrome.storage.local.remove(["OutputToConsole", "ConsoleDebug", "DisplayAlerts", "ShowBorder", "BorderColor", "BorderType", "ShowHighlight", "HightlightColor"]).then(function() {
 							//nordFocusReveal.dbug = 
 						}, nordFocusReveal.errorFun);
 					}, nordFocusReveal.errorFun);
@@ -91,7 +91,7 @@ nordFocusReveal = {
 			}
 		}
 		nordFocusReveal.dbug = nordFocusReveal.options["consoleDebug"];
-		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
+		var saving = chrome.storage.local.set({"options":nordFocusReveal.options});
 		if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
 		saving.then(function () {
 				if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
