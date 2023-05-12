@@ -21,9 +21,17 @@ nordFocusRevealCS = {
 		"duration" : 250,
 	},
 	run : function () {
+		let output ="";
 		nordFocusRevealCS.elementOnFocus = null;
 		nordFocusRevealCS.getFocusedItem();
+		if (nordFocusRevealCS.elementOnFocus.nodeName.toLowerCase() == "iframe") {
+			/*if (nordFocusRevealCS.dbug)*/ console.log ("It's on an iFrame, so getting outta here.");
+			console.log ("Element: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document));
 
+		} else {
+			//console.log ("elementOnFocus: " + nordFocusRevealCS.elementOnFocus.nodeName + ".");
+			//console.log ("elementOnFocus.toString(): " + nordFocusRevealCS.elementOnFocus.toString() + ".");
+		}
 		// Only bother getting the node text and name/id of the active element if you're going to display it somehow
 		if (nordFocusRevealCS.options["consoleOutput"] == true || nordFocusRevealCS.options["consoleAlert"] == true) {
 			var nodeText = "";
@@ -40,7 +48,11 @@ nordFocusRevealCS = {
 
 			if (nordFocusRevealCS.dbug) console.log("Got the focused item.  Now to reveal it to all.");
 
-			var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText + " has focus.";
+			// I'd rather get the XPath here
+			//var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusReleavCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document)) /*nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText +*/ + " has focus.";
+			output += "Element: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document);
+
+			
 			if (nordFocusRevealCS.dbug) {
 				var log = [];
 				for (let k in nordFocusRevealCS.options) log.push(k + ": " + nordFocusRevealCS.options[k]);
@@ -111,6 +123,32 @@ nordFocusRevealCS = {
 		}
 		return returnValue;
 	}, // End of getNodeText
+	getXPathForElement : function (el, xml) {
+		// Stolen shamelessly from https://developer.mozilla.org/en-US/docs/Web/XPath/Snippets
+
+		// If we know that we're in an iFrame, can we access the parentNode and find out which iFrame we're in
+		// And prepend that onto the XPath element?
+		let xpath = "";
+		let pos, tempitem2;
+
+		while (el !== xml.documentElement) {
+			pos = 0;
+			tempitem2 = el;
+			while (tempitem2) {
+				if (tempitem2.nodeType === 1 && tempitem2.nodeName === el.nodeName) {
+					// If it is ELEMENT_NODE of the same name
+					pos += 1;
+				}
+				tempitem2 = tempitem2.previousSibling;
+			}
+
+			xpath = /*`*[name()='${el.nodeName}' and namespace-uri()='${el.namespaceURI ?? ""}']*/`${el.nodeName}[${pos}]/${xpath}`;
+			el = el.parentNode;
+		}
+		//xpath = /*`/*[name()='${xml.documentElement.nodeName}' and namespace-uri()='${el.namespaceURI ?? ""}']/*/`${xml.documentElement.nodeName}${xpath}`;
+		xpath = xpath.replace(/\/$/, "");
+		return xpath.toLowerCase();
+	} // End of getXPathForElement
 	
 }
 
