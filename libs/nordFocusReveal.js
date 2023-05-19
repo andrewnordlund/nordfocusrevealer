@@ -9,6 +9,8 @@ nordFocusReveal = {
 		"consoleOutput":false,
 		"consoleDebug":false,
 		"consoleAlert":false,
+		"showElDesc":true,
+		"showXpath":true,
 		
 		"showBorder" : true,
 		"borderColor" : "red",
