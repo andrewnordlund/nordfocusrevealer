@@ -21,25 +21,26 @@ nordFocusRevealCS = {
 		"duration" : 250,
 	},
 	run : function () {
-		let output ="";
 		nordFocusRevealCS.elementOnFocus = null;
 		nordFocusRevealCS.getFocusedItem();
-		if (nordFocusRevealCS.elementOnFocus.nodeName.toLowerCase() == "iframe") {
-			/*if (nordFocusRevealCS.dbug)*/ console.log ("It's on an iFrame, so getting outta here.");
-			console.log ("Element: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document));
+		//if (nordFocusRevealCS.elementOnFocus.nodeName.toLowerCase() == "iframe") {
+			//if (nordFocusRevealCS.dbug)console.log ("It's on an iFrame, so getting outta here.");
+			//console.log ("Element: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document));
 
-		} else {
+		//} else {
 			//console.log ("elementOnFocus: " + nordFocusRevealCS.elementOnFocus.nodeName + ".");
 			//console.log ("elementOnFocus.toString(): " + nordFocusRevealCS.elementOnFocus.toString() + ".");
-		}
+		//}
 		// Only bother getting the node text and name/id of the active element if you're going to display it somehow
 		if (nordFocusRevealCS.options["consoleOutput"] == true || nordFocusRevealCS.options["consoleAlert"] == true) {
 			var nodeText = "";
-			nodeText = nordFocusRevealCS.getNodeText(nordFocusRevealCS.elementOnFocus);
+			nodeText += nordFocusRevealCS.getNodeText(nordFocusRevealCS.elementOnFocus);
 			if (nodeText && (nodeText == "" || nodeText == "not defined")) {
 				nodeText = "";
 			} else {
 				var maxLength = 115;	// This could be an option or two at some point
+				nodeText = nodeText.replaceAll("/\s\s+/", " ");
+				nodeText = nodeText.replaceAll("/\n\n+/", "\n");
 				if (nodeText.length > maxLength) {
 					nodeText = nodeText.substring(0, 100) + "..." + nodeText.substring(nodeText.length-10, nodeText.length-1);
 				}
@@ -49,8 +50,8 @@ nordFocusRevealCS = {
 			if (nordFocusRevealCS.dbug) console.log("Got the focused item.  Now to reveal it to all.");
 
 			// I'd rather get the XPath here
-			//var output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusReleavCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document)) /*nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText +*/ + " has focus.";
-			output += "Element: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document);
+			let output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText + " has focus.";
+			output += "\nXpath: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document);
 
 			
 			if (nordFocusRevealCS.dbug) {
