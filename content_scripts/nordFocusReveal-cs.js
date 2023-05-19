@@ -79,11 +79,11 @@ nordFocusRevealCS = {
 	
 	showBorder : function () {
 		nordFocusRevealCS.elementOnFocus.style.border = "8px " + nordFocusRevealCS.options["borderType"] + " " + nordFocusRevealCS.options["borderColor"];
-	        setTimeout(nordFocusRevealCS.resetStyle, 250);
+	        setTimeout(nordFocusRevealCS.resetStyle, parseInt(nordFocusRevealCS.options["duration"]));
 	}, // End of showBorder
 	showHighlight : function () {
 		nordFocusRevealCS.elementOnFocus.style.backgroundColor = nordFocusRevealCS.options["hightlightColor"];
-		setTimeout(nordFocusRevealCS.resetStyle, 250);
+		setTimeout(nordFocusRevealCS.resetStyle, parseInt(nordFocusRevealCS.options["duration"]));
 	}, // End of showHighlight
 	resetStyle : function () {
 		if (nordFocusRevealCS.elementOnFocusStyle) {

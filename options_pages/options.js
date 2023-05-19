@@ -23,6 +23,7 @@ nordFocusRevealOpts = {
 		"borderSolidRdo":null,
 		"borderDashedRdo":null,
 		"borderDottedRdo":null,
+		"borderDurTxt":null,
 		"showHighlightChk":null,
 		"highlightColorTxt":null
 	},
@@ -51,6 +52,7 @@ nordFocusRevealOpts = {
 		nordFocusRevealOpts.els["msgArea"].textContent = "Saved!";
 		nordFocusRevealOpts.els["msgArea"].classList.add("toast");
 		nordFocusRevealOpts.els["msgArea"].classList.remove("hide");
+		nordFocusRevealOpts.fillInputs();
 		setTimeout(function() {
 			nordFocusRevealOpts.els["msgArea"].classList.add("hide");
 			nordFocusRevealOpts.els["msgArea"].classList.remove("toast");
@@ -67,6 +69,7 @@ nordFocusRevealOpts = {
 		nordFocusRevealOpts.inputs["showBorderChk"].checked =  nordFocusReveal.options["showBorder"];
 		nordFocusRevealOpts.inputs["borderColorTxt"].setAttribute("value", nordFocusReveal.options["borderColor"]);
 		nordFocusRevealOpts.inputs["border" + nordFocusReveal.options["borderType"] + "Rdo"].checked = nordFocusReveal.options["borderColor"];
+		nordFocusRevealOpts.inputs["borderDurTxt"].setAttribute("value", nordFocusReveal.options["duration"]);
 
 		// Highlight
 		nordFocusRevealOpts.inputs["showHighlightChk"].checked = nordFocusReveal.options["showHighlight"];
@@ -74,6 +77,7 @@ nordFocusRevealOpts = {
 
 	}, // End of fillInputs
 	gatherInputs : function() {
+		const digOnlyRE = /\D/g;
 		// Console
 		nordFocusReveal.options["consoleOutput"] = nordFocusRevealOpts.inputs["consoleOutputChk"].checked;
 		nordFocusReveal.options["consoleDebug"] = nordFocusRevealOpts.inputs["consoleDebugChk"].checked;
@@ -83,6 +87,7 @@ nordFocusRevealOpts = {
 		nordFocusReveal.options["showBorder"] = nordFocusRevealOpts.inputs["showBorderChk"].checked;
 		nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
 		nordFocusReveal.options["borderType"] = (nordFocusRevealOpts.inputs["borderDottedRdo"].checked ? "Dotted" : (nordFocusRevealOpts.inputs["borderDashedRdo"].checked ? "Dashed" : "Solid")) ;
+		nordFocusReveal.options["duration"] = nordFocusRevealOpts.inputs["borderDurTxt"].value.replaceAll(digOnlyRE, "");
 
 		// Highlight
 		nordFocusReveal.options["showHighlight"] = nordFocusRevealOpts.inputs["showHighlightChk"].checked;
@@ -101,11 +106,13 @@ nordFocusRevealOpts = {
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.remove("hide");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.add("show");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].classList.add("active");
+				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].setAttribute("aria-current", "page");
 			} else {
 				//console.log ("adding hide to " + nordFocusRevealOpts.parts[p] +"Sec");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.remove("show");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.add("hide");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].classList.remove("active");
+				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].removeAttribute("aria-current");
 			}
 		}
 	}, // End of toggleSection
