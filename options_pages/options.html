@@ -35,7 +35,7 @@
 					<label><input id="consoleAlertChk" type="checkbox"/>Display alerts<br /></label>
 				</div>
 				
-			<p>*This developer extension is designed to easily get the focused element. Open the console to have more information (<kbd>Ctrl+Shift+J</kbd> (<kbd>Command+Shift+J</kbd> on Mac)).</p>
+			<p>*This developer extension is designed to easily get the focused element. Open the console to have more information (<kbd>Ctrl+Shift+F</kbd> (<kbd>Control+Shift+F</kbd> on Mac)).</p>
 			</section>
 			<section id="borderSec" class="hide">
 				<h2>Border</h2>
@@ -57,6 +57,9 @@
 						<input type="radio" id="borderDottedRdo" name="borderType" value="unchecked"/><label for="borderDottedRdo">Dotted</label>
 					</div>
 				</fieldset>
+				<div class="fieldHolder">
+        	        		<label for="borderDurTxt">Duration on screen: (ms)</label> <input type="text" id="borderDurTxt" value="250" />
+				</div>
 			</section>
 			<section id="highlightSec" class="hide">
 	               		<h2>Highlight</h2>
@@ -91,6 +94,7 @@
 			</section>
 			<section id="saveBtnHolder">
 		                <button id="saveBtn" type="button">Save</button>
+				<div class="hide" id="msgArea" aria-live="polite"></div>
 			</section>
 			</form>
 		</div>
