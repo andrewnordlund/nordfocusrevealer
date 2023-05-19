@@ -11,7 +11,8 @@ nordFocusRevealOpts = {
 		"consoleSec":null,
 		"borderSec":null,
 		"highlightSec":null,
-		"aboutSec":null
+		"aboutSec":null,
+		"msgArea":null
 	},
 	inputs : {
 		"consoleOutputChk":null,
@@ -37,7 +38,7 @@ nordFocusRevealOpts = {
 		nordFocusRevealOpts.els["saveBtn"].addEventListener("click", 
 			function () {
 				nordFocusRevealOpts.gatherInputs();
-				nordFocusReveal.saveOptions(null, nordFocusReveal.errorFun);
+				nordFocusReveal.saveOptions(nordFocusRevealOpts.savedSuccess, nordFocusReveal.errorFun);
 			}, false);
 		nordFocusRevealOpts.inputs["showHighlightChk"].addEventListener("change", nordFocusRevealOpts.toggleHighlightTxt, false);
 		nordFocusRevealOpts.setupLinks();
@@ -46,6 +47,16 @@ nordFocusRevealOpts = {
 		document.getElementById("slashonA").onclick = function () {browser.tabs.create({ url: "http://www.slashon.ca" });};
 		document.getElementById("nordburgA").onclick = function () {browser.tabs.create({ url: "https://www.nordburg.ca" });};
 	}, // End of init
+	savedSuccess : function () {
+		nordFocusRevealOpts.els["msgArea"].textContent = "Saved!";
+		nordFocusRevealOpts.els["msgArea"].classList.add("toast");
+		nordFocusRevealOpts.els["msgArea"].classList.remove("hide");
+		setTimeout(function() {
+			nordFocusRevealOpts.els["msgArea"].classList.add("hide");
+			nordFocusRevealOpts.els["msgArea"].classList.remove("toast");
+			nordFocusRevealOpts.els["msgArea"].textContent = "";
+			}, 5000);
+	}, // End of savedSuccess
 	fillInputs : function () {
 		// Console
 		nordFocusRevealOpts.inputs["consoleOutputChk"].checked = nordFocusReveal.options["consoleOutput"];
