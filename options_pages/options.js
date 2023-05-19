@@ -18,6 +18,8 @@ nordFocusRevealOpts = {
 		"consoleOutputChk":null,
 		"consoleDebugChk":null,
 		"consoleAlertChk":null,
+		"elDescChk":null,
+		"xpathChk":null,
 		"showBorderChk":null,
 		"borderColorTxt":null,
 		"borderSolidRdo":null,
@@ -57,13 +59,15 @@ nordFocusRevealOpts = {
 			nordFocusRevealOpts.els["msgArea"].classList.add("hide");
 			nordFocusRevealOpts.els["msgArea"].classList.remove("toast");
 			nordFocusRevealOpts.els["msgArea"].textContent = "";
-			}, 5000);
+			}, 3000);
 	}, // End of savedSuccess
 	fillInputs : function () {
 		// Console
 		nordFocusRevealOpts.inputs["consoleOutputChk"].checked = nordFocusReveal.options["consoleOutput"];
 		nordFocusRevealOpts.inputs["consoleDebugChk"].checked = nordFocusReveal.options["consoleDebug"];
 		nordFocusRevealOpts.inputs["consoleAlertChk"].checked = nordFocusReveal.options["consoleAlert"];
+		nordFocusRevealOpts.inputs["elDescChk"].checked = nordFocusReveal.options["showElDesc"];
+		nordFocusRevealOpts.inputs["xpathChk"].checked = nordFocusReveal.options["showXpath"];
 
 		// Border
 		nordFocusRevealOpts.inputs["showBorderChk"].checked =  nordFocusReveal.options["showBorder"];
@@ -82,6 +86,8 @@ nordFocusRevealOpts = {
 		nordFocusReveal.options["consoleOutput"] = nordFocusRevealOpts.inputs["consoleOutputChk"].checked;
 		nordFocusReveal.options["consoleDebug"] = nordFocusRevealOpts.inputs["consoleDebugChk"].checked;
 		nordFocusReveal.options["consoleAlert"] = nordFocusRevealOpts.inputs["consoleAlertChk"].checked;
+		nordFocusReveal.options["showElDesc"] = nordFocusRevealOpts.inputs["elDescChk"].checked;
+		nordFocusReveal.options["showXpath"] = nordFocusRevealOpts.inputs["xpathChk"].checked;
 
 		// Border
 		nordFocusReveal.options["showBorder"] = nordFocusRevealOpts.inputs["showBorderChk"].checked;

@@ -10,6 +10,8 @@ nordFocusRevealCS = {
 		"consoleOutput":false,
 		"consoleDebug":false,
 		"consoleAlert":false,
+		"showElDesc":true,
+		"showXpath":true,
 		
 		"showBorder" : true,
 		"borderColor" : "red",
@@ -39,7 +41,8 @@ nordFocusRevealCS = {
 				nodeText = "";
 			} else {
 				var maxLength = 115;	// This could be an option or two at some point
-				nodeText = nodeText.replaceAll("/\s\s+/", " ");
+				nodeText = nodeText.replaceAll("/[ \s][ \s]+/", " ");
+				nodeText = nodeText.replaceAll("/^[ \s\t]*[\n\l\f][ \s\t]*/", "\n");
 				nodeText = nodeText.replaceAll("/\n\n+/", "\n");
 				if (nodeText.length > maxLength) {
 					nodeText = nodeText.substring(0, 100) + "..." + nodeText.substring(nodeText.length-10, nodeText.length-1);
@@ -49,9 +52,12 @@ nordFocusRevealCS = {
 
 			if (nordFocusRevealCS.dbug) console.log("Got the focused item.  Now to reveal it to all.");
 
-			// I'd rather get the XPath here
-			let output = "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText + " has focus.";
-			output += "\nXpath: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document);
+			let output = "";
+			if (nordFocusRevealCS.options["showElDesc"]) {
+				output += "Element: " + nordFocusRevealCS.elementOnFocus.toString() + " (" + (nordFocusRevealCS.elementOnFocus.hasAttribute("id") ? nordFocusRevealCS.elementOnFocus.nodeName + "#" + nordFocusRevealCS.elementOnFocus.getAttribute("id") : nordFocusRevealCS.getParentWithID(nordFocusRevealCS.elementOnFocus)) + " class=\"" + nordFocusRevealCS.elementOnFocus.className + "\" " + ")" + nodeText + " has focus.";
+				if (nordFocusRevealCS.options["showXpath"]) output += "\n";
+			}
+			if (nordFocusRevealCS.options["showXpath"]) output += "Xpath: " + nordFocusRevealCS.getXPathForElement(nordFocusRevealCS.elementOnFocus, document);
 
 			
 			if (nordFocusRevealCS.dbug) {
@@ -61,8 +67,8 @@ nordFocusRevealCS = {
 			}
 
 			if (nordFocusRevealCS.dbug) console.log("consoleOutput: " + nordFocusRevealCS.options["consoleOutput"] + ".");
-			if (nordFocusRevealCS.options["consoleOutput"] == true) console.log (output);
-			if (nordFocusRevealCS.options["consoleAlert"] == true) alert (output);
+			if (nordFocusRevealCS.options["consoleOutput"] == true && output != "") console.log (output);
+			if (nordFocusRevealCS.options["consoleAlert"] == true & output != "") alert (output);
 		}
 		if (nordFocusRevealCS.options["showBorder"] == true) nordFocusRevealCS.showBorder();
 		
