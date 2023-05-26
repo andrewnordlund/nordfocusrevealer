@@ -41,8 +41,8 @@ nordFocusRevealCS = {
 				nodeText = "";
 			} else {
 				var maxLength = 115;	// This could be an option or two at some point
-				nodeText = nodeText.replaceAll("/[ \s][ \s]+/", " ");
-				nodeText = nodeText.replaceAll("/^[ \s\t]*[\n\l\f][ \s\t]*/", "\n");
+				nodeText = nodeText.replaceAll("/[ \s\t][ \s\t]+/", " ");
+				nodeText = nodeText.replaceAll("/^[ \s\t]*$", "");
 				nodeText = nodeText.replaceAll("/\n\n+/", "\n");
 				if (nodeText.length > maxLength) {
 					nodeText = nodeText.substring(0, 100) + "..." + nodeText.substring(nodeText.length-10, nodeText.length-1);
