@@ -21,6 +21,7 @@ nordFocusReveal = {
 		
 		"duration" : 250,
 	},
+	maxDuration : 60000,
 	init : function () {
 		// Something may need to go here at some point
 		if (nordFocusReveal.dbug) console.log ("Initing");

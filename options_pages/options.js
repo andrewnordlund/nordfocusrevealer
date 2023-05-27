@@ -40,6 +40,7 @@ nordFocusRevealOpts = {
 		}
 		nordFocusRevealOpts.els["saveBtn"].addEventListener("click", 
 			function () {
+				console.log ("Gonna try Saving");
 				nordFocusRevealOpts.gatherInputs();
 				nordFocusReveal.saveOptions(nordFocusRevealOpts.savedSuccess, nordFocusReveal.errorFun);
 			}, false);
@@ -63,6 +64,7 @@ nordFocusRevealOpts = {
 	}, // End of savedSuccess
 	fillInputs : function () {
 		// Console
+		console.log ("Filling inputs with duration: " + nordFocusReveal.options["duration"]);
 		nordFocusRevealOpts.inputs["consoleOutputChk"].checked = nordFocusReveal.options["consoleOutput"];
 		nordFocusRevealOpts.inputs["consoleDebugChk"].checked = nordFocusReveal.options["consoleDebug"];
 		nordFocusRevealOpts.inputs["consoleAlertChk"].checked = nordFocusReveal.options["consoleAlert"];
@@ -71,16 +73,17 @@ nordFocusRevealOpts = {
 
 		// Border
 		nordFocusRevealOpts.inputs["showBorderChk"].checked =  nordFocusReveal.options["showBorder"];
-		nordFocusRevealOpts.inputs["borderColorTxt"].setAttribute("value", nordFocusReveal.options["borderColor"]);
+		nordFocusRevealOpts.inputs["borderColorTxt"].value = nordFocusReveal.options["borderColor"];
 		nordFocusRevealOpts.inputs["border" + nordFocusReveal.options["borderType"] + "Rdo"].checked = nordFocusReveal.options["borderColor"];
-		nordFocusRevealOpts.inputs["borderDurTxt"].setAttribute("value", nordFocusReveal.options["duration"]);
+		nordFocusRevealOpts.inputs["borderDurTxt"].value = nordFocusReveal.options["duration"];
 
 		// Highlight
 		nordFocusRevealOpts.inputs["showHighlightChk"].checked = nordFocusReveal.options["showHighlight"];
 		nordFocusRevealOpts.inputs["highlightColorTxt"].value = nordFocusReveal.options["hightlightColor"];
-
+		console.log ("Filled inputs");
 	}, // End of fillInputs
 	gatherInputs : function() {
+		console.log ("Gathering options");
 		const digOnlyRE = /\D/g;
 		// Console
 		nordFocusReveal.options["consoleOutput"] = nordFocusRevealOpts.inputs["consoleOutputChk"].checked;
@@ -91,14 +94,33 @@ nordFocusRevealOpts = {
 
 		// Border
 		nordFocusReveal.options["showBorder"] = nordFocusRevealOpts.inputs["showBorderChk"].checked;
-		nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
-		nordFocusReveal.options["borderType"] = (nordFocusRevealOpts.inputs["borderDottedRdo"].checked ? "Dotted" : (nordFocusRevealOpts.inputs["borderDashedRdo"].checked ? "Dashed" : "Solid")) ;
-		nordFocusReveal.options["duration"] = nordFocusRevealOpts.inputs["borderDurTxt"].value.replaceAll(digOnlyRE, "");
+		if (nordFocusRevealOpts.sanitizeColour(nordFocusRevealOpts.inputs["borderColorTxt"].value)) {
+			nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
+		} else {
+			console.log ("Leaving as " + nordFocusReveal.options["borderColor"] +".");
+		}
+
+		nordFocusReveal.options["borderType"] = (nordFocusRevealOpts.inputs["borderDottedRdo"].checked ? "Dotted" : (nordFocusRevealOpts.inputs["borderDashedRdo"].checked ? "Dashed" : "Solid"));
+		let durVal = nordFocusRevealOpts.inputs["borderDurTxt"].value.replaceAll(digOnlyRE, "").trim();
+		if (durVal.match(/^\d+$/)) {
+			nordFocusReveal.options["duration"] = (parseInt(durVal) > parseInt(nordFocusReveal["maxDuration"]) ? nordFocusReveal["maxDuration"] : durVal);
+		}
+		console.log ("Duration is now: " + nordFocusReveal.options["duration"]);
 
 		// Highlight
 		nordFocusReveal.options["showHighlight"] = nordFocusRevealOpts.inputs["showHighlightChk"].checked;
-		nordFocusReveal.options["hightlightColor"] = nordFocusRevealOpts.inputs["highlightColorTxt"].value;
+		if (nordFocusRevealOpts.sanitizeColour(nordFocusRevealOpts.inputs["highlightColorTxt"].value)) nordFocusReveal.options["hightlightColor"] = nordFocusRevealOpts.inputs["highlightColorTxt"].value;
+		console.log ("Gathered options");
 	}, // End of gatherInputs
+	sanitizeColour : function (c) {
+		// Stolen from https://stackoverflow.com/questions/48484767/javascript-check-if-string-is-valid-css-color
+		let s = new Option().style;
+		s.color = c;
+
+		// return 'false' if color wasn't assigned
+		console.log ("Returning: " + s.color == c.toLowerCase() + ".");
+		return s.color == c.toLowerCase();
+	}, // End of sanitizeColour		       
 	setupLinks : function () {
 		for (let p in nordFocusRevealOpts.parts) {
 			nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].addEventListener("click", nordFocusRevealOpts.toggleSection, false);
