@@ -31,7 +31,7 @@ nordFocusRevealOpts = {
 	},
 	parts : ["console", "border", "highlight", "about"],
 	init : function () {
-		
+		nordFocusRevealOpts.dbug = nordFocusReveal.dbug;
 		for (el in nordFocusRevealOpts.els) {
 			nordFocusRevealOpts.els[el] = document.getElementById(el);
 		}
@@ -40,7 +40,7 @@ nordFocusRevealOpts = {
 		}
 		nordFocusRevealOpts.els["saveBtn"].addEventListener("click", 
 			function () {
-				console.log ("Gonna try Saving");
+				if (nordFocusRevealOpts.dbug) console.log ("Gonna try Saving");
 				nordFocusRevealOpts.gatherInputs();
 				nordFocusReveal.saveOptions(nordFocusRevealOpts.savedSuccess, nordFocusReveal.errorFun);
 			}, false);
@@ -64,7 +64,6 @@ nordFocusRevealOpts = {
 	}, // End of savedSuccess
 	fillInputs : function () {
 		// Console
-		console.log ("Filling inputs with duration: " + nordFocusReveal.options["duration"]);
 		nordFocusRevealOpts.inputs["consoleOutputChk"].checked = nordFocusReveal.options["consoleOutput"];
 		nordFocusRevealOpts.inputs["consoleDebugChk"].checked = nordFocusReveal.options["consoleDebug"];
 		nordFocusRevealOpts.inputs["consoleAlertChk"].checked = nordFocusReveal.options["consoleAlert"];
@@ -79,11 +78,10 @@ nordFocusRevealOpts = {
 
 		// Highlight
 		nordFocusRevealOpts.inputs["showHighlightChk"].checked = nordFocusReveal.options["showHighlight"];
+		if (nordFocusRevealOpts.inputs["showHighlightChk"].checked && nordFocusRevealOpts.inputs["highlightColorTxt"].hasAttribute("disabled")) nordFocusRevealOpts.inputs["highlightColorTxt"].removeAttribute("disabled");
 		nordFocusRevealOpts.inputs["highlightColorTxt"].value = nordFocusReveal.options["hightlightColor"];
-		console.log ("Filled inputs");
 	}, // End of fillInputs
 	gatherInputs : function() {
-		console.log ("Gathering options");
 		const digOnlyRE = /\D/g;
 		// Console
 		nordFocusReveal.options["consoleOutput"] = nordFocusRevealOpts.inputs["consoleOutputChk"].checked;
@@ -94,33 +92,32 @@ nordFocusRevealOpts = {
 
 		// Border
 		nordFocusReveal.options["showBorder"] = nordFocusRevealOpts.inputs["showBorderChk"].checked;
-		if (nordFocusRevealOpts.sanitizeColour(nordFocusRevealOpts.inputs["borderColorTxt"].value)) {
-			nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
-		} else {
-			console.log ("Leaving as " + nordFocusReveal.options["borderColor"] +".");
-		}
+		if (nordFocusRevealOpts.sanitizeColour(nordFocusRevealOpts.inputs["borderColorTxt"].value)) nordFocusReveal.options["borderColor"] = nordFocusRevealOpts.inputs["borderColorTxt"].value;
 
 		nordFocusReveal.options["borderType"] = (nordFocusRevealOpts.inputs["borderDottedRdo"].checked ? "Dotted" : (nordFocusRevealOpts.inputs["borderDashedRdo"].checked ? "Dashed" : "Solid"));
 		let durVal = nordFocusRevealOpts.inputs["borderDurTxt"].value.replaceAll(digOnlyRE, "").trim();
 		if (durVal.match(/^\d+$/)) {
 			nordFocusReveal.options["duration"] = (parseInt(durVal) > parseInt(nordFocusReveal["maxDuration"]) ? nordFocusReveal["maxDuration"] : durVal);
 		}
-		console.log ("Duration is now: " + nordFocusReveal.options["duration"]);
 
 		// Highlight
 		nordFocusReveal.options["showHighlight"] = nordFocusRevealOpts.inputs["showHighlightChk"].checked;
 		if (nordFocusRevealOpts.sanitizeColour(nordFocusRevealOpts.inputs["highlightColorTxt"].value)) nordFocusReveal.options["hightlightColor"] = nordFocusRevealOpts.inputs["highlightColorTxt"].value;
-		console.log ("Gathered options");
 	}, // End of gatherInputs
 	sanitizeColour : function (c) {
-		// Stolen from https://stackoverflow.com/questions/48484767/javascript-check-if-string-is-valid-css-color
+		// Modified from from https://stackoverflow.com/questions/48484767/javascript-check-if-string-is-valid-css-color
+		//  Uh oh.  This isn't working for things like #303030.  Gotta convert to rgb(\d, \d, \d)
+		// If needs be, other stuff can be stolen from here:  https://stackoverflow.com/questions/5623838/rgb-to-hex-and-hex-to-rgb
+		
+		if (nordFocusRevealOpts.dbug) console.log ("sanitizeColour::Is " + c + " a valid colour?");
 		let s = new Option().style;
 		s.color = c;
 
 		// return 'false' if color wasn't assigned
-		console.log ("Returning: " + s.color == c.toLowerCase() + ".");
-		return s.color == c.toLowerCase();
-	}, // End of sanitizeColour		       
+		let rv = !(s.color === "")
+		if (nordFocusRevealOpts.dbug) console.log ("sanitizeColour: " + s.color +", so rv is " + rv + ".");
+		return rv;
+	}, // End of sanitizeColour      
 	setupLinks : function () {
 		for (let p in nordFocusRevealOpts.parts) {
 			nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].addEventListener("click", nordFocusRevealOpts.toggleSection, false);
@@ -130,13 +127,11 @@ nordFocusRevealOpts = {
 		e.preventDefault();
 		for (let p in nordFocusRevealOpts.parts) {
 			if (e.target.getAttribute("id") == nordFocusRevealOpts.parts[p] +"A") {
-				//console.log ("adding show to " + nordFocusRevealOpts.parts[p] +"Sec");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.remove("hide");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.add("show");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].classList.add("active");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].setAttribute("aria-current", "page");
 			} else {
-				//console.log ("adding hide to " + nordFocusRevealOpts.parts[p] +"Sec");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.remove("show");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"Sec"].classList.add("hide");
 				nordFocusRevealOpts.els[nordFocusRevealOpts.parts[p] +"A"].classList.remove("active");

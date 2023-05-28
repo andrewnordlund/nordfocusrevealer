@@ -65,9 +65,9 @@ nordFocusReveal = {
 					console.log ("Something there.");
 					console.log ("typeof(savedObj): " + typeof(savedObj) + ".");
 					console.log ("savedObj: " + savedObj + ".");
-					//for (var k in savedObj) {
-					//	console.log (k);
-					//}
+					for (var k in savedObj) {
+						if (k.match(/color/i)) console.log (k + ": " + savedObj[k]);
+					}
 				}
 				for (var opt in nordFocusReveal.options) {
 					if (savedObj.hasOwnProperty(opt)) {
@@ -82,7 +82,7 @@ nordFocusReveal = {
 
 			}
 
-			if (nordFocusReveal.dbug) console.log ("loadOptions::success: " + success + ", typeof: " + typeof success + ".");
+			//if (nordFocusReveal.dbug) console.log ("loadOptions::success: " + success + ", typeof: " + typeof success + ".");
 			nordFocusReveal.setLoaded();
 			if (success && success != null && typeof success == "function") success();
 		}, failure);
@@ -95,9 +95,9 @@ nordFocusReveal = {
 		}
 		nordFocusReveal.dbug = nordFocusReveal.options["consoleDebug"];
 		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
-		if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
+		//if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
 		saving.then(function () {
-				if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
+				//if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
 				if (success && success != null && typeof success == "function") success();
 			}, failure);
 	}, // End of saveOptions
