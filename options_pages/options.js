@@ -12,7 +12,8 @@ nordFocusRevealOpts = {
 		"borderSec":null,
 		"highlightSec":null,
 		"aboutSec":null,
-		"msgArea":null
+		"msgArea":null,
+		"keyboardShortcutStr":null
 	},
 	inputs : {
 		"consoleOutputChk":null,
@@ -32,12 +33,20 @@ nordFocusRevealOpts = {
 	parts : ["console", "border", "highlight", "about"],
 	init : function () {
 		nordFocusRevealOpts.dbug = nordFocusReveal.dbug;
+
+		
+
+
 		for (el in nordFocusRevealOpts.els) {
 			nordFocusRevealOpts.els[el] = document.getElementById(el);
 		}
 		for (ins in nordFocusRevealOpts.inputs) {
 			nordFocusRevealOpts.inputs[ins] = document.getElementById(ins);
 		}
+		nordFocusReveal.checkCommands(function (sck) {
+				console.log ("Got sck: " + sck + ".");
+			nordFocusRevealOpts.els["keyboardShortcutStr"].textContent = sck;
+			});
 		nordFocusRevealOpts.els["saveBtn"].addEventListener("click", 
 			function () {
 				if (nordFocusRevealOpts.dbug) console.log ("Gonna try Saving");
@@ -51,7 +60,7 @@ nordFocusRevealOpts = {
 		document.getElementById("slashonA").onclick = function () {browser.tabs.create({ url: "http://www.slashon.ca" });};
 		document.getElementById("nordburgA").onclick = function () {browser.tabs.create({ url: "https://www.nordburg.ca" });};
 	}, // End of init
-	savedSuccess : function () {
+		savedSuccess : function () {
 		nordFocusRevealOpts.els["msgArea"].textContent = "Saved!";
 		nordFocusRevealOpts.els["msgArea"].classList.add("toast");
 		nordFocusRevealOpts.els["msgArea"].classList.remove("hide");

@@ -41,8 +41,16 @@ nordFocusRevealBG = {
 	    console.log(output);	
 	}
 	*/
+	updateToolTip : function (x) {
+		nordFocusReveal.checkCommands(function (sck) {
+			browser.browserAction.setTitle({"title":sck});
+		}. nordFocusReveal.errorFun);
+	}, // End of updateToolTip
 }
 browser.browserAction.onClicked.addListener(nordFocusRevealBG.check);
+
+browser.commands.onChanged.addListener(nordFocusRevealBG.updateToolTip);
+
 let changeHandler = function () {
 	
 	nordFocusReveal.loadOptions(function () {nordFocusRevealBG.dbug = nordFocusReveal.options["consoleDebug"];}, nordFocusReveal.errorFun);

@@ -25,6 +25,7 @@ nordFocusReveal = {
 	init : function () {
 		// Something may need to go here at some point
 		if (nordFocusReveal.dbug) console.log ("Initing");
+		
 	}, // End of init
 	countObjs : function (obj) {
 
@@ -87,6 +88,23 @@ nordFocusReveal = {
 			if (success && success != null && typeof success == "function") success();
 		}, failure);
 	}, // End of loadOptions
+	checkCommands : function (success) {
+		// Gonna try to get commands....
+		let getCommands = browser.commands.getAll();
+		//console.log ("Got commands : " + getCommands + ".");
+		getCommands.then (function (c) {
+
+			/*for (let i = 0; i<c.length;i++) {
+				console.log ("checkCommands::c: " + c[i] + ".");
+				for (let j in c[i]) {
+					console.log (j + ": " + c[i][j] + ".");
+				}
+			}*/
+			let sck = c[0]["shortcut"].replace("MacCtrl", "control");
+			console.log ("shortcut: " + sck + ".");
+			if (success && success != null && typeof success == "function") success(sck);
+		}, nordFocusReveal.errorFun);
+	}, // End of checkCommands
 	saveOptions : function (success, failure) {
 		if (nordFocusReveal.dbug) {
 			for (let k in nordFocusReveal.options) {
