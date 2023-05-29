@@ -1,6 +1,6 @@
 {
   "name": "Nordburg Focus Revealer",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "author": "Andrew Nordlund and Maxim Perry",
   "manifest_version": 2,
   "applications": {
@@ -15,7 +15,7 @@
   },
   "browser_action": {
     "browser_style": true,
-    "default_title": "Reveal Focus (Ctrl+Shift+F)",
+    "default_title": "Reveal Focus",
     "default_icon": {
       "19": "icons/nordFocusReveal-19.png",
       "38": "icons/nordFocusReveal-38.png"

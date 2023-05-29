@@ -43,7 +43,7 @@ nordFocusRevealBG = {
 	*/
 	updateToolTip : function (x) {
 		nordFocusReveal.checkCommands(function (sck) {
-			browser.browserAction.setTitle({"title":sck});
+			browser.browserAction.setTitle({"title":"Reveal Focus (" + sck +")"});
 		}, nordFocusReveal.errorFun);
 	}, // End of updateToolTip
 }
