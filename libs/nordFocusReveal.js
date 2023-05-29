@@ -101,7 +101,7 @@ nordFocusReveal = {
 				}
 			}*/
 			let sck = c[0]["shortcut"].replace("MacCtrl", "control");
-			console.log ("shortcut: " + sck + ".");
+			if (nordFocusReveal.dbug) console.log ("shortcut: " + sck + ".");
 			if (success && success != null && typeof success == "function") success(sck);
 		}, nordFocusReveal.errorFun);
 	}, // End of checkCommands
