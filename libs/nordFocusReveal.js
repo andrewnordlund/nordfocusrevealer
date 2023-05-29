@@ -21,9 +21,11 @@ nordFocusReveal = {
 		
 		"duration" : 250,
 	},
+	maxDuration : 60000,
 	init : function () {
 		// Something may need to go here at some point
 		if (nordFocusReveal.dbug) console.log ("Initing");
+		
 	}, // End of init
 	countObjs : function (obj) {
 
@@ -64,9 +66,9 @@ nordFocusReveal = {
 					console.log ("Something there.");
 					console.log ("typeof(savedObj): " + typeof(savedObj) + ".");
 					console.log ("savedObj: " + savedObj + ".");
-					//for (var k in savedObj) {
-					//	console.log (k);
-					//}
+					for (var k in savedObj) {
+						if (k.match(/color/i)) console.log (k + ": " + savedObj[k]);
+					}
 				}
 				for (var opt in nordFocusReveal.options) {
 					if (savedObj.hasOwnProperty(opt)) {
@@ -81,11 +83,28 @@ nordFocusReveal = {
 
 			}
 
-			if (nordFocusReveal.dbug) console.log ("loadOptions::success: " + success + ", typeof: " + typeof success + ".");
+			//if (nordFocusReveal.dbug) console.log ("loadOptions::success: " + success + ", typeof: " + typeof success + ".");
 			nordFocusReveal.setLoaded();
 			if (success && success != null && typeof success == "function") success();
 		}, failure);
 	}, // End of loadOptions
+	checkCommands : function (success) {
+		// Gonna try to get commands....
+		let getCommands = browser.commands.getAll();
+		//console.log ("Got commands : " + getCommands + ".");
+		getCommands.then (function (c) {
+
+			/*for (let i = 0; i<c.length;i++) {
+				console.log ("checkCommands::c: " + c[i] + ".");
+				for (let j in c[i]) {
+					console.log (j + ": " + c[i][j] + ".");
+				}
+			}*/
+			let sck = c[0]["shortcut"].replace("MacCtrl", "control");
+			if (nordFocusReveal.dbug) console.log ("shortcut: " + sck + ".");
+			if (success && success != null && typeof success == "function") success(sck);
+		}, nordFocusReveal.errorFun);
+	}, // End of checkCommands
 	saveOptions : function (success, failure) {
 		if (nordFocusReveal.dbug) {
 			for (let k in nordFocusReveal.options) {
@@ -94,9 +113,9 @@ nordFocusReveal = {
 		}
 		nordFocusReveal.dbug = nordFocusReveal.options["consoleDebug"];
 		var saving = browser.storage.local.set({"options":nordFocusReveal.options});
-		if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
+		//if (nordFocusReveal.dbug) console.log ("saveOptions::success: " + success + "\ntypeof: " + typeof success + ".");
 		saving.then(function () {
-				if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
+				//if (nordFocusReveal.dbug) console.log ("saveOptions::savingThen::success: " + success + "\ntypeof: " + typeof success + ".");
 				if (success && success != null && typeof success == "function") success();
 			}, failure);
 	}, // End of saveOptions

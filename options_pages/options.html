@@ -41,7 +41,7 @@
 					<label><input id="xpathChk" type="checkbox"/>Show XPath<br /></label>
 				</div>
 				
-			<p>*This developer extension is designed to easily get the focused element. Open the console to have more information (<kbd>Ctrl+Shift+F</kbd> (<kbd>Control+Shift+F</kbd> on Mac)).</p>
+			<p>*This developer extension is designed to easily get the focused element. Press <kbd id="keyboardShortcutStr">Control+Shift+F</kbd> to activate.</p>
 			</section>
 			<section id="borderSec" class="hide">
 				<h2>Border</h2>
@@ -50,6 +50,7 @@
 				</div>
 				<div class="fieldHolder">
         	        		<label for="borderColorTxt">Border color:</label> <input type="text" id="borderColorTxt" value="red" />
+					<!-- for future updators of this: there may be an idea to use <input type="color"> here, but you're limited to '#RRGGBB' formats.  The way it is now, we're allowing any CSS color - though it may get reduced to that format..  See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color for more details -->
 				</div>
 				<fieldset>
 	                		<legend>Border type:</legend>
